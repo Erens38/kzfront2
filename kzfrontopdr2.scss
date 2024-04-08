@@ -1,0 +1,104 @@
+// Variabelen
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$font-family: Arial, sans-serif;
+
+// Namespace
+%button-styles {
+  background-color: $primary-color;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+@mixin hover-effect {
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+// Stijlen
+body {
+  font-family: $font-family;
+}
+
+header {
+  background-color: $secondary-color;
+  padding: 20px;
+  text-align: center;
+
+  h1 {
+    color: white;
+  }
+}
+
+nav {
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      margin-right: 20px;
+
+      a {
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  nav ul li {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+
+.btn-primary {
+  @extend %button-styles;
+}
+
+.btn-secondary {
+  @extend %button-styles;
+  background-color: $secondary-color;
+}
+
+
+$columns: 3;
+
+.container {
+  @if $columns > 4 {
+    max-width: 1200px;
+  } @elseif $columns == 3 {
+    max-width: 900px;
+  } @else {
+    max-width: 600px;
+  }
+}
+
+
+@for $i from 1 through 3 {
+  .col-#{$i} {
+    width: calc((100% / #{$columns}) * #{$i});
+  }
+}
+
+
+$icons: home, about, contact;
+
+@each $icon in $icons {
+  .icon-#{$icon} {
+    background-image: url('/images/#{$icon}.png');
+  }
+}
